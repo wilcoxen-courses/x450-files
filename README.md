@@ -1,29 +1,17 @@
-# Exercise: TBD
+# Example: Handling Directories and Files
 
 ## Summary
 
-TBD
+The **demo.py** file in this repository shows how to use several techniques to manage directories of files and to handle file pathnames. It also shows how to use Pandas to read Excel files and to read and write Stata databanks, and how to use GeoPandas to read shapefiles with special internal structures.
 
 ## Input Data
 
-TBD 
+The input files are included in the repository.
 
 ## Deliverables
 
-TBD 
+**None**. This is an example only and there's **nothing due**.
 
 ## Instructions
 
-1. TBD
-
-1. TBD
-
-## Submitting
-
-Once you're happy with everything and have committed all of the changes to
-your local repository, please push the changes to GitHub. At that point, 
-you're done: you have submitted your answer.
-
-## Tips
-
-+ TBD
+1. Browse the demo.py to see what techniques it demonstrates.
