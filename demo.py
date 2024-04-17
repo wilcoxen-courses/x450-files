@@ -9,6 +9,7 @@ import pandas as pd
 import geopandas as gpd
 import os
 import glob
+import matplotlib.pyplot as plt
 
 #
 #  Function for listing files conveniently
@@ -152,3 +153,12 @@ zip2 = 'nested_layer.zip'
 subdir = 'stores'
 
 stores = gpd.read_file(zip2+'!'+subdir)
+
+#
+#  Draw a map
+#
+
+fig,ax1 = plt.subplots(dpi=300)
+county.plot(color='tan',ax=ax1)
+stores.plot(ax=ax1)
+ax1.axis('off')
