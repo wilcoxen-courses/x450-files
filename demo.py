@@ -10,6 +10,7 @@ import geopandas as gpd
 import os
 import glob
 import matplotlib.pyplot as plt
+from zipfile import ZipFile
 
 #
 #  Function for listing files conveniently
@@ -131,6 +132,40 @@ print( (wb1 == wbx).all() )
 
 #%%
 #
+#  Using the .compare() method to find differences between two dataframes.
+#  The dataframes must have the same indexes and columns.
+#
+#  Create an initial dataframe with a column indicating counties that
+#  are not 99
+#
+
+wb_a = wb1.copy()
+wb_a['not_99'] = wb_a['county'] != 99
+
+#
+#  Set the index so we can see what changes.
+#
+
+wb_a = wb_a.set_index(['state','county','tract','block_group'])
+
+#
+#  Make another dataframe with county 99's data clobbered for one column
+#
+
+wb_b = wb_a.copy()
+wb_b['B02001_002E'] = wb_b['B02001_002E'].where( wb_b['not_99'], None )
+
+#
+#  Do the comparison
+#
+
+cmp = wb_a.compare(wb_b,result_names=('wb_a','wb_b'))
+
+print('\nDifferences found by compare:\n')
+print(cmp)
+
+#%%
+#
 #  Reading a shapefile from a zip with multiple layers.
 #
 #  Append the name of the SHP file to the zipfile's name
@@ -138,7 +173,24 @@ print( (wb1 == wbx).all() )
 #
 
 zip1 = 'multiple_layers.zip'
+
+#
+#  Files in archive
+#
+
+files = ZipFile(zip1).namelist()
+print(f"\nFiles in {zip1}:")
+print('\n'.join([f for f in files]))
+
+#  
+#  SHP of desired layer
+#
+
 layer = 'county.shp'
+
+#
+#  Get it
+#
 
 county = gpd.read_file(zip1+'!'+layer)
 
