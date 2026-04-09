@@ -115,7 +115,7 @@ print(wb2['bg01'])
 #  legal Stata variable names.
 #
 
-wb1.rename(columns={'block group':'block_group'},inplace=True)
+wb1 = wb1.rename(columns={'block group':'block_group'})
 wb1.to_stata('bg_single.dta',write_index=False)
 
 dta_files = glob.glob('*.dta')
